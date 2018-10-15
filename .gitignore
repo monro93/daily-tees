@@ -1,0 +1,14 @@
+
+###> symfony/framework-bundle ###
+/.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+### global
+docker-compose.yml
+docker
+
+### vue client
+daily-tees-client/node_modules
