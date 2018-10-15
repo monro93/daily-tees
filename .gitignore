@@ -9,6 +9,7 @@
 ### global
 docker-compose.yml
 docker
+.idea
 
 ### vue client
 daily-tees-client/node_modules
