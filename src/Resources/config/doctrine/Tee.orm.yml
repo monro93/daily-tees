@@ -1,0 +1,33 @@
+App\Entity\Tee:
+    type: entity
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: auto
+
+    fields:
+        url:
+            type: string
+            nullable: true
+        name:
+            type: string
+            nullable: true
+        picture:
+            type: string
+            nullable: true
+        price:
+            type: integer
+            nullable: false
+        expiresOn:
+            type: datetime
+            nullable: false
+        expired:
+            type: boolean
+            nullable: false
+
+    manyToOne:
+        site:
+            targetEntity: App\Entity\Site
+            inversedBy: tees

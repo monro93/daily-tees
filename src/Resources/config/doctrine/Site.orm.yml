@@ -1,0 +1,22 @@
+App\Entity\Site:
+    type: entity
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: auto
+
+    fields:
+        url:
+            type: string
+            nullable: false
+        name:
+            type: string
+            nullable: false
+
+    oneToMany:
+        tees:
+            targetEntity: App\Entity\Tee
+            mappedBy: site
+            cascade: ["persist", "remove"]

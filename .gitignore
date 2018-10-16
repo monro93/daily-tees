@@ -10,6 +10,7 @@
 docker-compose.yml
 docker
 .idea
+database_test_data.sql
 
 ### vue client
 daily-tees-client/node_modules
