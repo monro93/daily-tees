@@ -1,8 +1,24 @@
 import Vue from 'vue'
-import App from './App.vue'
+import VueRouter from 'vue-router'
+import config from './config.js';
 
-Vue.config.productionTip = false
+global.config = config;
+Vue.config.productionTip = false;
+
+Vue.use(VueRouter);
+
+import TeeList from './components/TeeList.vue';
+
+const routes = [
+    { path: '/', component: TeeList },
+];
+
+const router = new VueRouter({
+    mode: 'history',
+    routes
+});
 
 new Vue({
-  render: h => h(App)
-}).$mount('#app')
+    router,
+    render: h => h(TeeList)
+}).$mount('#app');
