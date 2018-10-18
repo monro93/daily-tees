@@ -1,29 +1,37 @@
 <template>
-    <div>
-        <div class="columns">
-            <template v-for="tee in tees">
-                <a :href="tee.url" v-bind:key="tee.id">
-                    <div class="column">
-                        <div><img :src="tee.picture"></div>
-                        <div>{{ tee.price }}</div>
-                    </div>
-                </a>
-            </template>
+    <section class="section">
+        <div class="container">
+            <div class="columns is-multiline">
+                <tee
+                    v-for="tee in tees"
+                    v-bind:tee="tee"
+                ></tee>
+            </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
     import axios from 'axios'
+    import Tee from './Tee.vue';
 
     export default {
         data() {
             return {
-                tees: {}
+                tees: {},
             }
         },
+        components: {
+            Tee
+        },
         async created () {
-            const response = await axios.get(global.config.host+global.config.endpoints.tees, { headers: {Accept: 'application/json'}});
+            const response = await axios.get(
+                global.config.host + global.config.endpoints.tees,
+                {
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                });
             this.tees = response.data;
         }
     }
