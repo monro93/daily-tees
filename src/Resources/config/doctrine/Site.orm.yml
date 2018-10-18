@@ -15,6 +15,10 @@ App\Entity\Site:
             type: string
             nullable: false
 
+        logoImage:
+            type: string
+            nullable: false
+
     oneToMany:
         tees:
             targetEntity: App\Entity\Tee

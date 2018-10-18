@@ -5,49 +5,61 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+* @ApiResource(attributes={
+ *     "normalization_context"={"groups"={"tee"}},
+ *     "denormalization_context"={"groups"={"edit_tee"}}
+ * })
  */
 class Tee
 {
     /**
      * @var int
+     * @Groups({"tee", "site"})
      */
     private $id;
 
     /**
      * @var string
+     * @Groups({"tee", "edit_tee"})
      */
     private $name;
 
     /**
      * @var Site
+     * @Groups({"tee", "edit_tee"})
      */
     private $site;
 
     /**
      * @var string
+     * @Groups({"tee", "edit_tee"})
      */
     private $picture;
 
     /**
      * @var int
+     * @Groups({"tee", "edit_tee"})
      */
     private $price;
 
     /**
      * @var string
+     * @Groups({"tee", "edit_tee"})
      */
     private $url;
 
     /**
      * @var \DateTime
+     * @Groups({"tee", "edit_tee"})
      */
     private $expiresOn;
 
     /**
      * @var bool
+     * @Groups({"tee"})
      */
     private $expired = false;
 

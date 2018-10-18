@@ -8,29 +8,43 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(attributes={
+ *     "normalization_context"={"groups"={"site"}},
+ *     "denormalization_context"={"groups"={"edit_site"}}
+ * })
  */
 class Site
 {
     /**
      * @var int
+     * @Groups({"site", "tee"})
      */
     private $id;
 
     /**
      * @var string
+     * @Groups({"site", "edit_site"})
      */
     private $url;
 
     /**
      * @var string
+     * @Groups({"site", "tee"})
+     */
+    private $logoImage;
+
+    /**
+     * @var string
+     * @Groups({"site", "edit_site"})
      */
     private $name;
 
     /**
      * @var Collection | Tee[]
+     * @Groups({"site"})
      */
     private $tees;
 
@@ -70,6 +84,23 @@ class Site
     {
         $this->url = $url;
     }
+
+    /**
+     * @return string
+     */
+    public function getLogoImage(): string
+    {
+        return $this->logoImage;
+    }
+
+    /**
+     * @param string $logoImage
+     */
+    public function setLogoImage(string $logoImage): void
+    {
+        $this->logoImage = $logoImage;
+    }
+
 
     /**
      * @return string
