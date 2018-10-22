@@ -1,14 +1,20 @@
 <template>
-    <section class="section">
-        <div class="container">
-            <div class="columns is-multiline">
-                <tee
-                    v-for="tee in tees"
-                    v-bind:tee="tee"
-                ></tee>
+    <div class="container">
+        <section class="section">
+            <div @click="updateTees">Click</div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <div class="columns is-multiline">
+                    <tee
+                        v-for="tee in tees"
+                        v-bind:tee="tee"
+                        v-bind:key="tee.id"
+                    ></tee>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 </template>
 
 <script>
@@ -23,6 +29,18 @@
         },
         components: {
             Tee
+        },
+        methods: {
+            async updateTees() {
+                const response = await axios.get(
+                    global.config.host + global.config.endpoints.tees+'?site=2',
+                    {
+                        headers: {
+                            Accept: 'application/json'
+                        }
+                    });
+                this.tees = response.data;
+            }
         },
         async created () {
             const response = await axios.get(

@@ -1,25 +1,40 @@
 <template>
     <div class="column is-one-third tee-column" v-bind:key="tee.id">
-        <a :href="tee.url" target="_blank">
-            <div class="tee" v-bind:style="{ backgroundImage: 'url(' + tee.picture + ')' }">
+        <!--<a :href="tee.url" target="_blank">-->
+            <div class="tee" v-bind:style="{ backgroundImage: 'url(' + tee.picture + ')' }" @click="isComponentModalActive = true">
                 <div class="price">
                     <div>{{ tee.price / 100 }}€</div>
                 </div>
                 <div class="name is-inline">{{ tee.name }}</div>
             </div>
-        </a>
+            <b-modal :active.sync="isComponentModalActive" has-modal-card>
+                <modal-tee-image v-bind:tee_modal="tee"></modal-tee-image>
+            </b-modal>
+        <!--</a>-->
     </div>
 </template>
 
 <script>
+    import ModalTeeImage from './ModalTeeImage.vue';
+
     export default {
         props: {
             tee: {
                 type: Object,
                 required: true
+            },
+            isComponentModalActive: {
+                type: Boolean,
+                required: false,
+                default: false
             }
-        }
+        },
+        components: {
+            ModalTeeImage
+        },
+
     }
+
 </script>
 
 <style scoped>
