@@ -1,0 +1,11 @@
+global:
+    yes: Yes
+    no: No
+
+filters:
+    tee:
+        label:
+            name: Name
+            site: Site
+            price: Price
+            expired: Is expired

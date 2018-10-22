@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -12,6 +14,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     "normalization_context"={"groups"={"tee"}},
  *     "denormalization_context"={"groups"={"edit_tee"}}
  * })
+ *
+ * @ApiFilter(
+ *     SearchFilter::class,
+ *      properties={
+ *          "id": "exact",
+ *          "name":"iword_start",
+ *          "site":"exact",
+ *          "expired":"exact",
+ *      })
  */
 class Tee
 {

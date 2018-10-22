@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\DependencyInjection\Compiler\FilterGetterPass;
+use App\Service\Filter\FilterGetter\FilterGetterInterface;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -48,6 +50,10 @@ class Kernel extends BaseKernel
         $loader->load($confDir.'/{packages}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, 'glob');
         $loader->load($confDir.'/{services}'.self::CONFIG_EXTS, 'glob');
         $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
+
+        $container->registerForAutoconfiguration(FilterGetterInterface::class)
+            ->addTag('app.filter_getter');
+
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes)
@@ -57,5 +63,11 @@ class Kernel extends BaseKernel
         $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
+    }
+
+    protected function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->addCompilerPass(new FilterGetterPass());
     }
 }

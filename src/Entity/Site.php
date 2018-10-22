@@ -20,13 +20,13 @@ class Site
 {
     /**
      * @var int
-     * @Groups({"site", "tee"})
+     * @Groups({"site", "tee", "type_ahead"})
      */
     private $id;
 
     /**
      * @var string
-     * @Groups({"site", "edit_site"})
+     * @Groups({"site", "edit_site", "type_ahead"})
      */
     private $url;
 
